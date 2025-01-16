@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+
+members = ["example-server"]
+
+[workspace.package]
+edition = "2021"
+version = "0.1.0"
+repository = "https://github.com/marekpsenka/rust-advantages"
+
+[workspace.dependencies]
+anyhow = "1.0"
+async-trait = "0.1"
+axum = "0.8"
+serde = "1.0"
+serde_json = "1.0"
+thiserror = "1.0"
+tokio = { version = "1.43", features = ["rt-multi-thread", "macros", "sync"] }
+uuid = "1.12"
