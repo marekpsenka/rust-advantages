@@ -1,0 +1,81 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+        "label": "Build",
+        "command": "cargo",
+        "args": [
+            "build"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "problemMatcher": "$rustc",
+        "icon": {
+            "id": "server-process",
+            "color": "terminal.ansiRed"
+        }
+    },
+    {
+        "label": "Run example-server",
+        "type": "shell",
+        "command": "cargo run",
+        "problemMatcher": "$rustc",
+        "icon": {
+            "id": "run",
+            "color": "terminal.ansiGreen"
+        }
+    },
+    {
+        "label": "GET /events",
+        "type": "shell",
+        "command": "curl",
+        "args": [
+            "-N",
+            "http://localhost:3000/events"
+        ],
+        "icon": {
+            "id": "run",
+            "color": "terminal.ansiGreen"
+        },
+        "problemMatcher": []
+    },
+    {
+        "label": "Test",
+        "command": "cargo",
+        "args": [
+            "test"
+        ],
+        "group": {
+            "kind": "test",
+            "isDefault": true
+        },
+        "problemMatcher": [
+            "$rustc"
+        ],
+        "icon": {
+            "id": "server-process",
+            "color": "terminal.ansiRed"
+        }
+    },
+    {
+        "label": "Clippy Fix",
+        "command": "cargo",
+        "args": [
+            "clippy",
+            "--fix",
+            "--allow-staged",
+            "--",
+            "-Dwarnings"
+        ],
+        "problemMatcher": [
+            "$rustc"
+        ],
+        "icon": {
+            "id": "server-process",
+            "color": "terminal.ansiRed"
+        }
+    }
+]
+}
