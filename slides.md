@@ -33,7 +33,7 @@ img[alt~="rust-logo"] {
 
 ![logo](img/edhouse_logo.png)
 
-# Výhody Rustu, o kterých nikdo nemluví
+# Výhody Rustu, o kterých 'nikdo nemluví'
 
 ![rust-logo](./img/rust-logo.png)
 
@@ -59,8 +59,8 @@ img[alt~="rust-logo"] {
 ## Generátor vodíku H2Gem
 
 - Zařízení pro výrobu zeleného vodíku
-- V Edhouse jsme vyvinuli kompletní firmware
-- Rust nám významně pomohl se spolehlivostí
+- Kolegové v Edhouse vyvinuli kompletní firmware
+- Rust jim významně pomohl se spolehlivostí
 
 <style>
 img[alt~="leancat_logo"] {
@@ -91,10 +91,66 @@ Role Rustu:
 
 - Celé řešení, včetně ovladačů pomocí RTIC
 - žádné runtime chyby v průběhu vývoje a testování
-- rychlejší obrátky na HW ve srovnání s C++
+- rychlejší obrátky na HW
 
 ![bg left:33%](img/ui_raw.jpg)
 ![logo](img/edhouse_logo.png)
+
+---
+
+![bg height:650px](./img/rust_vs_others.jpg)
+![bg height:600px](./img/others_vs_rust.jpeg)
+
+---
+
+## Tato přednáška
+
+<style>
+img[alt~="qr"] {
+  position: absolute;
+  top: 360px;
+  right: 140px;
+  width: 250px
+}
+</style>
+
+Záměrně se vyhneme srovnání s jinými jazyky
+
+Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
+
+Zaměříme se na přednosti, o kterých 'nikdo nemluví'
+
+- Souběžnost bez obav (Fearless Concurrency)
+- Živý ekosystém a komunita
+- Silná makra and generiky
+- Práce s chybami
+
+![qr](./img/QR-repository.png)
+
+---
+
+![bg left:42% 80%](./img/SSE.png)
+
+## Server Sent Events (SSE)
+
+```text
+c:\code\rust-advantages>cargo run
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\example-server.exe`
+http://localhost:3000
+```
+
+```shell
+client> curl -N http://localhost:3000/events 
+
+event: beep
+data: {"counter_value":7}
+
+event: beep
+data: {"counter_value":8}
+
+...
+```
 
 ---
 
