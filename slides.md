@@ -131,7 +131,7 @@ Zaměříme se na přednosti, o kterých 'nikdo nemluví'
 
 ![bg left:42% 80%](./img/SSE.png)
 
-## Server Sent Events (SSE)
+## Server-sent Events (SSE)
 
 ```text
 c:\code\rust-advantages>cargo run
@@ -150,6 +150,50 @@ event: beep
 data: {"counter_value":8}
 
 ...
+```
+
+---
+
+## Souběžnost bez obav (Fearless Concurrency)
+
+---
+
+## Co můžeme neohroženě (fearlessly) napsat jinde?
+
+```pseudocode
+function f(integer& n)
+{
+    ++n;
+}
+
+function main () {
+    integer n = 0;
+    thread my_thread(f, &n);
+    my_thread.join();
+    print(n);
+}
+```
+
+---
+
+## Rust potřebuje víc, aby zůstal v klidu (fear-less)
+
+```rust
+fn f(n_container: Arc<Mutex<i32>>) {
+    let mut n = n_container.lock().expect("Lock is not poisoned");
+    *n += 1;
+}
+
+fn main() {
+    let n_container = Arc::new(Mutex::new(0i32));
+    let container_clone = n_container.clone();
+    let my_thread = std::thread::spawn(move || {
+        f(container_clone);
+    });
+    _ = my_thread.join();
+    let n = n_container.lock().expect("Lock not poisoned");
+    println!("{}", *n);
+}
 ```
 
 ---

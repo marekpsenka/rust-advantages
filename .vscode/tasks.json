@@ -20,7 +20,19 @@
     {
         "label": "Run example-server",
         "type": "shell",
-        "command": "cargo run",
+        "command": "cargo",
+        "args": ["run", "--bin", "example-server"],
+        "problemMatcher": "$rustc",
+        "icon": {
+            "id": "run",
+            "color": "terminal.ansiGreen"
+        }
+    },
+    {
+        "label": "Run example-guardrails",
+        "type": "shell",
+        "command": "cargo",
+        "args": ["run", "--bin", "example-guardrails"],
         "problemMatcher": "$rustc",
         "icon": {
             "id": "run",

@@ -1,7 +1,7 @@
 [workspace]
 resolver = "2"
 
-members = ["example-server"]
+members = [ "example-guardrails","example-server"]
 
 [workspace.package]
 edition = "2021"
