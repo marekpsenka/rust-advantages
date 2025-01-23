@@ -61,7 +61,7 @@ Záměrně se vyhneme srovnání s jinými jazyky
 
 Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
 
-Zaměříme se na přednosti, o kterých 'nikdo nemluví'
+Zaměříme se na vybrané přednosti, o kterých 'nikdo nemluví'
 
 - Souběžnost bez obav (Fearless Concurrency)
 - Živý ekosystém a komunita
@@ -235,7 +235,50 @@ let server_handle = spawn(run_server(state));
 _ = try_join!(beep_handle, pump_handle, server_handle)?;
 ```
 
-<!-- _footer: "* Termín proces je použit ve smyslu obecného asynchronního procesu, nikoliv OS procesu" -->
+<!-- _footer: "* Termín proces zde označuje obecný asynchronní proces, nikoliv OS proces." -->
+---
+
+![logo](img/edhouse_logo.png)
+
+## Beeper
+
+```rust
+async fn send_beep(sender: Sender<u32>) -> Result<()> {
+    let mut interval = interval(Duration::from_secs(1));
+    let mut counter = 0u32;
+    loop {
+        interval.tick().await;
+        counter += 1;
+        sender.send(counter).await?
+    }
+}
+```
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## Pumpa
+
+```rust
+#[derive(Serialize)]
+struct BeepEventData {
+    counter_value: u32,
+}
+
+async fn pump_events(
+    publisher: Arc<dyn EventPublisher + Send + Sync>,
+    mut receiver: Receiver<u32>,
+) -> Result<()> {
+    loop {
+        let counter_value = receiver.recv().await.ok_or(anyhow!("Channel closed"))?;
+        let data = BeepEventData { counter_value };
+        let dto = EventDto::with_json_payload("beep".to_string(), data)?;
+        publisher.publish(dto);
+    }
+}
+```
+
 ---
 
 ![logo](img/edhouse_logo.png)
