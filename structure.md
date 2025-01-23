@@ -1,15 +1,15 @@
 # Structure
 
 * Intro (5, 5)
+  * This talk (2) - meme + list of advantages, It is all on GitHub - QR Code
   * me (1)
   * Rust in Edhouse (2) - LeanCat WE
-  * This talk (2) - meme + list of advantages, It is all on GitHub - QR Code
 * Example (1, 6)
   * General diagram (1) - what is SSE, Console output from GET /events (1)
 * Part 1: Fearless Concurrency (6, 12)
   * Avoiding communication via shared memory (2) - what the compiler prevents?
-  * Processes interacting via channels diagram (1)
   * Channels at a glance (1) - just simple snippet, Sender, Receiver
+  * Processes interacting via channels diagram (1)
   * Snippet from example: Sending message to pump? (1)
   * Snippet from example: Pump? (1)
 * Part 2: Strong ecosystem and community (4?, 15)

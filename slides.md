@@ -39,6 +39,39 @@ img[alt~="rust-logo"] {
 
 ---
 
+![bg height:650px](./img/rust_vs_others.jpg)
+![bg height:600px](./img/others_vs_rust.jpeg)
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## Tato přednáška
+
+<style>
+img[alt~="qr"] {
+  position: absolute;
+  top: 360px;
+  right: 140px;
+  width: 250px
+}
+</style>
+
+Záměrně se vyhneme srovnání s jinými jazyky
+
+Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
+
+Zaměříme se na přednosti, o kterých 'nikdo nemluví'
+
+- Souběžnost bez obav (Fearless Concurrency)
+- Živý ekosystém a komunita
+- Silná makra and generiky
+- Práce s chybami
+
+![qr](./img/QR-repository.png)
+
+---
+
 <!-- paginate: true -->
 
 <!-- _footer: in/marek-psenka -->
@@ -98,36 +131,7 @@ Role Rustu:
 
 ---
 
-![bg height:650px](./img/rust_vs_others.jpg)
-![bg height:600px](./img/others_vs_rust.jpeg)
-
----
-
-## Tato přednáška
-
-<style>
-img[alt~="qr"] {
-  position: absolute;
-  top: 360px;
-  right: 140px;
-  width: 250px
-}
-</style>
-
-Záměrně se vyhneme srovnání s jinými jazyky
-
-Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
-
-Zaměříme se na přednosti, o kterých 'nikdo nemluví'
-
-- Souběžnost bez obav (Fearless Concurrency)
-- Živý ekosystém a komunita
-- Silná makra and generiky
-- Práce s chybami
-
-![qr](./img/QR-repository.png)
-
----
+![logo](img/edhouse_logo.png)
 
 ![bg left:42% 80%](./img/SSE.png)
 
@@ -158,6 +162,8 @@ data: {"counter_value":8}
 
 ---
 
+![logo](img/edhouse_logo.png)
+
 ## Co můžeme neohroženě (fearlessly) napsat jinde?
 
 ```pseudocode
@@ -175,6 +181,8 @@ function main () {
 ```
 
 ---
+
+![logo](img/edhouse_logo.png)
 
 ## Rust potřebuje víc, aby zůstal v klidu (fear-less)
 
@@ -196,6 +204,38 @@ fn main() {
 }
 ```
 
+---
+
+## Producent a konzument
+
+![logo](img/edhouse_logo.png)
+
+- Producent počítá a odesílá. Konzument přijímá a v mezičase dělá jinou práci.
+- Potenciál urychlení v paralelním a souběžném prostředí.
+- Typická implementace:
+  - primitiva (_Mutexy_, _Condition Variables_, _Fronty_, etc.), nad sdílenou pamětí.
+- Rust:
+  - `channel` = `Sender` 🎤 a `Receiver` 🔊
+
+---
+
+## Můj příklad z pohledu procesů*
+
+![logo](img/edhouse_logo.png)
+
+![](./img/processes.png)
+
+```rust
+let publisher = Arc::new(DefaultEventPublisher::new());
+let (sender, receiver) = channel(1000);
+let beep_handle = spawn(send_beep(sender));
+let pump_handle = spawn(pump_events(publisher, receiver));
+let server_handle = spawn(run_server(state));
+
+_ = try_join!(beep_handle, pump_handle, server_handle)?;
+```
+
+<!-- _footer: "* Termín proces je použit ve smyslu obecného asynchronního procesu, nikoliv OS procesu" -->
 ---
 
 ![logo](img/edhouse_logo.png)
