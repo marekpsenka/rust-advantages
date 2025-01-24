@@ -15,7 +15,7 @@
 * Part 2: Strong ecosystem and community (4?, 15)
   * Axum and Tokio, crates (1)
   * Cargo ?, (1)
-  * Snippet from Example (1) - SSE implementation `tokio::sync::mpsc::Broadcast`, `publish`
+  * Snippet from Example (1) - SSE implementation `tokio::sync::broadcast`, `publish`
   * Snippet from Example (1) - SSE implementation `Stream`, `get_events`
 * Part 3: Powerful macros and generics (3, 19)
   * Snippet from Example (1) - `Serialize` derive macro from `Serde`

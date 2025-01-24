@@ -6,8 +6,8 @@ footer: github.com/marekpsenka/rust-advantages
 <style>
 img[alt~="logo"] {
   position: absolute;
-  top: 30px;
-  right: 30px;
+  top: 10px;
+  right: 10px;
   width: 210px;
 }
 
@@ -63,10 +63,10 @@ Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
 
 Zaměříme se na vybrané přednosti, o kterých 'nikdo nemluví'
 
-- Souběžnost bez obav (Fearless Concurrency)
-- Živý ekosystém a komunita
-- Silná makra and generiky
-- Práce s chybami
+1. Souběžnost bez obav (Fearless Concurrency)
+2. Živý ekosystém a komunita
+3. Silná makra and generiky
+4. Práce s chybami
 
 ![qr](./img/QR-repository.png)
 
@@ -158,7 +158,9 @@ data: {"counter_value":8}
 
 ---
 
-## Souběžnost bez obav (Fearless Concurrency)
+![logo](img/edhouse_logo.png)
+
+## 1. Souběžnost bez obav (Fearless Concurrency)
 
 ---
 
@@ -240,7 +242,7 @@ _ = try_join!(beep_handle, pump_handle, server_handle)?;
 
 ![logo](img/edhouse_logo.png)
 
-## Beeper
+## Pípák
 
 ```rust
 async fn send_beep(sender: Sender<u32>) -> Result<()> {
@@ -277,6 +279,79 @@ async fn pump_events(
         publisher.publish(dto);
     }
 }
+```
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## 2. Silný ekosystém a komunita
+
+---
+
+## Tokio a Axum
+
+![logo](img/edhouse_logo.png)
+
+<style>
+img[alt~="tokio-logo"] {
+  position: absolute;
+  top: 420px;
+  right: 140px;
+  width: 250px
+}
+</style>
+
+knihovny, v Rustu se říká _craty_ (angl. crate = bedna)
+
+- `tokio` - asynchronní runtime a sada nástrojů pro stavbu asynchronního kódu
+  - `spawn`, `broadcast::channel`, `time::interval`
+- `axum` - webový aplikační framework
+  - `Router`, `routing::get`, `response::sse`
+
+![tokio-logo](./img/tokio.png)
+
+---
+
+![logo](img/edhouse_logo.png)
+
+```rust
+pub struct DefaultEventPublisher {
+    tx: Sender<EventDto>,
+    _rx: Receiver<EventDto>,
+}
+
+impl EventPublisher for DefaultEventPublisher {
+    fn get_stream(&self) -> BroadcastStream<EventDto> {
+        BroadcastStream::from(self.tx.subscribe())
+    }
+
+    fn publish(&self, evt: EventDto) {
+        self.tx
+            .send(evt)
+            .expect("Will not fail because we keep one Receiver instance");
+    }
+}
+```
+
+---
+
+![logo](img/edhouse_logo.png)
+
+```rust
+
+pub async fn get_events(
+    State(state): State<Arc<ApiState>>,
+) -> Sse<impl Stream<Item = Result<Event, BoxError>>> {
+    let stream = state.be_publisher.get_stream().map(|maybe_evt| {
+        maybe_evt
+            .map(|evt| Event::default().event(evt.name).data(evt.payload))
+            .map_err(|err| err.into())
+    });
+
+    Sse::new(stream).keep_alive(KeepAlive::default())
+}
+
 ```
 
 ---
