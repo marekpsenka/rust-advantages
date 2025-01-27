@@ -17,13 +17,12 @@
   * Snippet from Example (1) - SSE implementation `tokio::sync::broadcast`, `publish`
   * Snippet from Example (1) - SSE implementation `Stream`, `get_events`
   * Cargo (1)
-* Part 3: Powerful macros and generics (3, 19)
-  * Snippet from Example (1) - `Serialize` derive macro from `Serde`
-  * Types of macros (1)
+* Part 3: Powerful macros and generics (3, 18)
   * Snippet from Example (1) - `EventDto::with_json_payload` generic function
-* Part 4: Error Handling (4, 23)
+  * Snippet from Example (1) - `Serialize` derive macro from `Serde`
+* Part 4: Error Handling (4, 22)
   * Test (1)
   * How it works (1)
   * Diagram (1)
   * vs. Exceptions (1)
-* Conclusion (2, 25)
+* Conclusion (2, 24)

@@ -356,6 +356,8 @@ pub async fn get_events(
 
 ---
 
+![logo](img/edhouse_logo.png)
+
 ## Cargo
 
 <style>
@@ -377,6 +379,62 @@ _Package manager_, sjednocuje způsob:
 - atd.
 
 ![cargo-logo](./img/cargo.png)
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## 3. Silná makra a generiky
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## Generická funkce s trait bound
+
+Serializace do JSON, legendární `serde` v akci
+
+```rust
+pub struct EventDto {
+    pub name: String,
+    pub payload: String, // <-- JSON goes here!, e.g. {"counter_value":7}
+}
+
+impl EventDto {
+    pub fn with_json_payload<T: serde::Serialize>(name: String, payload: T)
+    ) -> serde_json::Result<EventDto> {
+        Ok(EventDto {
+            name,
+            payload: serde_json::to_string(&payload)?,
+        })
+    }
+}
+```
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## Implementace trait pomocí procedurálního makra
+
+```rust
+#[derive(Serialize)]
+struct BeepEventData {
+    counter_value: u32,
+}
+```
+
+Procedurální makro prochází příslušný stream tokenů a transformuje jej.
+
+Makro `Serialize` generuje implementaci traitu `serde::Serialize` čistě z definice struktury.
+
+Eliminace boilerplate, děje se za překladu bez runtime overhead.
+
+---
+
+![logo](img/edhouse_logo.png)
+
+## 4. Práce s chybami
 
 ---
 
@@ -429,149 +487,19 @@ impl CoffeeMachine {
 
 ## Filozofie
 
-Myšlenka vyhradit prostor pro chybové informace v návratové hodnotě není nová
+- Myšlenka vyhradit prostor pro chybové informace v návratové hodnotě není nová
 
-```C
-int main(void)
-{
-    FILE *f = fopen("non_existent", "r");
-    if (f == NULL) {
-        perror("fopen() failed");
-    } else {
-        fclose(f);
-    }
-}
-```
+- Rust ji významně rozpracoval
 
-```text
-fopen() failed: No such file or directory
-```
+- Jiná strategie - výjimky
+  - nejsou vidět, jsou implicitní (čest výjimkám 🙂)
+  - řešit vyjímky je opt-in a přitom můžou shodit celý program
+
+- Errory
+  - jsou vidět, jsou explicitní
+  - neřešit error je opt-out, programátor musí explicitně říct, že ho nechce řešit
 
 ---
-
-![logo](img/edhouse_logo.png)
-
-## Rust nám to usnadňuje
-
-```rust
-pub enum Result<T, E> {
-    Ok(T),
-    Err(E),
-}
-```
-
-```rust
-fn open_nonexistent_file() {
-    match std::fs::File::open("non_existent") {
-        Ok(file) => drop(file),
-        Err(err) => println!("open() failed: {}", err),
-    }
-}
-```
-
-```text
-open() failed: The system cannot find the file specified. (os error 2)
-```
-
----
-
-![logo](img/edhouse_logo.png)
-
-## Porovnej
-
-```C
-int main(void) {
-    FILE *f = fopen("non_existent", "r");
-    if (f == NULL) {
-        perror("fopen() failed");
-    } else {
-        fclose(f);
-    }
-}
-```
-
-```rust
-fn open_nonexistent_file() {
-    match std::fs::File::open("non_existent") {
-        Ok(file) => drop(file),
-        Err(err) => println!("open() failed: {}", err),
-    }
-}
-```
-
----
-
-## Jiná strategie - výjimky v C\# - nejsou vidět
-
-![logo](img/edhouse_logo.png)
-
-```C#
-public static System.IO.FileStream Open (string path, System.IO.FileMode mode);
-```
-
-Kde se dozvím jak vypadá chyba? __V dokumentaci__:
-> ArgumentNullException
-> PathTooLongException
-> (...)
-
-Rust je explicitní. Dozvím se to __v kódu__:
-
-```rust
-pub fn open<P: AsRef<Path>>(path: P) -> std::Result<T, std::io::Error>;
-```
-
----
-
-## Vyjímky střílí
-
-![logo](img/edhouse_logo.png)
-
-```C#
-void OpenNonexistentFile() {
-    File.Open("non_existent", FileMode.Open);
-}
-
-OpenNonexistentFile();
-
-DoSomethingElse();
-```
-
-```text
-C:\code\rust-error-handling\_examples_cs>dotnet run
-Unhandled exception. System.IO.FileNotFoundException: Could not find file 'non_existent'.
-(...)
-```
-
----
-
-## Porovnej
-
-![logo](img/edhouse_logo.png)
-
-```C#
-void OpenNonexistentFile() {
-    try 
-    {
-        File.Open("non_existent", FileMode.Open);
-    }
-    catch (Exception e) {
-        Console.WriteLine($"{e}");
-    }
-}
-```
-
-```rust
-fn open_nonexistent_file() {
-    match std::fs::File::open("non_existent") {
-        Ok(file) => drop(file),
-        Err(err) => println!("open() failed: {}", err),
-    }
-}
-```
-
----
-
-![logo](img/edhouse_logo.png)
 
 ## Shrnutí
 
