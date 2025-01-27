@@ -12,11 +12,11 @@
   * Processes interacting via channels diagram (1)
   * Snippet from example: Sending message to pump? (1)
   * Snippet from example: Pump? (1)
-* Part 2: Strong ecosystem and community (4?, 15)
+* Part 2: Strong ecosystem and community (4, 16)
   * Axum and Tokio, crates (1)
-  * Cargo ?, (1)
   * Snippet from Example (1) - SSE implementation `tokio::sync::broadcast`, `publish`
   * Snippet from Example (1) - SSE implementation `Stream`, `get_events`
+  * Cargo (1)
 * Part 3: Powerful macros and generics (3, 19)
   * Snippet from Example (1) - `Serialize` derive macro from `Serde`
   * Types of macros (1)

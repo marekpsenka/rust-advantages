@@ -356,6 +356,30 @@ pub async fn get_events(
 
 ---
 
+## Cargo
+
+<style>
+img[alt~="cargo-logo"] {
+  position: absolute;
+  top: 200px;
+  right: 100px;
+  width: 400px
+}
+</style>
+
+_Package manager_, sjednocuje způsob:
+
+- popisu artefaktů - `Cargo.toml`
+- sestavení - `cargo build`
+- publikace - `cargo publish`
+- __testování__ - `cargo test`
+- __dokumentace__ - `cargo doc`
+- atd.
+
+![cargo-logo](./img/cargo.png)
+
+---
+
 ![logo](img/edhouse_logo.png)
 
 ```rust
