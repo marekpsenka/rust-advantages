@@ -48,15 +48,6 @@ img[alt~="rust-logo"] {
 
 ## Tato přednáška
 
-<style>
-img[alt~="qr"] {
-  position: absolute;
-  top: 360px;
-  right: 140px;
-  width: 250px
-}
-</style>
-
 Záměrně se vyhneme srovnání s jinými jazyky
 
 Obejdeme nejčastěji skloňované přednosti = výkon a paměťovou bezpečnost
@@ -67,8 +58,6 @@ Zaměříme se na vybrané přednosti, o kterých 'nikdo nemluví'
 2. Živý ekosystém a komunita
 3. Silná makra and generiky
 4. Práce s chybami
-
-![qr](./img/QR-repository.png)
 
 ---
 
@@ -82,10 +71,24 @@ Zaměříme se na vybrané přednosti, o kterých 'nikdo nemluví'
 
 ## Marek Pšenka
 
+<style>
+img[alt~="moravia_qr"] {
+  position: absolute;
+  top: 450px;
+  right: 160px;
+  width: 200px
+}
+</style>
+
 - Technický vedoucí v Edhouse
 - 7 let zkušeností
 - Většinu kariéry jsem pracoval s C++ a C#
 - Rust používám již dva roky
+- Založil jsem uživatelskou skupinu Rust Moravia
+
+![width:320px](./img/ferris.svg)
+
+![moravia_qr](./img/qr.png)
 
 ---
 
@@ -128,6 +131,23 @@ Role Rustu:
 
 ![bg left:33%](img/ui_raw.jpg)
 ![logo](img/edhouse_logo.png)
+
+---
+
+<style>
+img[alt~="qr"] {
+  position: absolute;
+  top: 240px;
+  right: 500px;
+  width: 250px
+}
+</style>
+
+![logo](img/edhouse_logo.png)
+
+## 0. Demo příklad
+
+![qr](./img/QR-repository.png)
 
 ---
 
@@ -364,7 +384,7 @@ pub async fn get_events(
 img[alt~="cargo-logo"] {
   position: absolute;
   top: 200px;
-  right: 100px;
+  right: 250px;
   width: 400px
 }
 </style>
@@ -378,7 +398,7 @@ _Package manager_, sjednocuje způsob:
 - __dokumentace__ - `cargo doc`
 - atd.
 
-![cargo-logo](./img/cargo.png)
+![cargo-logo](./img/cargo.svg)
 
 ---
 
@@ -501,19 +521,33 @@ impl CoffeeMachine {
 
 ---
 
-## Shrnutí
+![logo](img/edhouse_logo.png)
 
-- Rust nám na zákaznických projektech pomáhá psát spolehlivý kód
-- Myšlenka vyhradit prostor pro chybové informace v návratové hodnotě není nová
-- Rust nám to usnadňuje standardním typem `Result<T, E>`
-- Příklad alternativní strategie jsou výjimky.
-- Nejsou ale vidět a střílí - nutná bdělost
+## Outro
 
 ---
 
-<!-- _footer: "" -->
-<!-- paginate: false -->
+<style>
+img[alt~="linkedin-qr"] {
+  position: absolute;
+  top: 450px;
+  right: 200px;
+  width: 220px
+}
+</style>
 
-![bg width:600px](./img/ferris.svg)
+![logo](img/edhouse_logo.png)
 
-![bg width:400px](./img/qr.png)
+## Shrnutí
+
+- O Rustu se toho hodně namluví
+- Jeden extrém tvrdí, že se má vše přepsat do Rustu
+- Druhý extrém zase, že Rust patří jen tam, kde je potřebný výkon a bezpečnost
+- Pokud hledáte no-bullshit pohled na Rust, klidně se na mě obraťte
+- Rust má mnoho předností, o kterých 'se nemluví', vybral jsem pro vás:
+  1. Souběžnost bez obav (Fearless Concurrency)
+  2. Živý ekosystém a komunitu
+  3. Silná makra and generiky
+  4. Práci s chybami
+
+![linkedin-qr](./img/qr-linkedin.png)
