@@ -25,4 +25,4 @@
   * How it works (1)
   * Diagram (1)
   * vs. Exceptions (1)
-* Conclusion (2, 24)
+* Conclusion (1, 23)

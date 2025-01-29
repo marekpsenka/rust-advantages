@@ -210,8 +210,8 @@ function main () {
 
 ```rust
 fn f(n_container: Arc<Mutex<i32>>) {
-    let mut n = n_container.lock().expect("Lock is not poisoned");
-    *n += 1;
+    let mut n_ref = n_container.lock().expect("Lock is not poisoned");
+    *n_ref += 1;
 }
 
 fn main() {
@@ -221,8 +221,8 @@ fn main() {
         f(container_clone);
     });
     _ = my_thread.join();
-    let n = n_container.lock().expect("Lock not poisoned");
-    println!("{}", *n);
+    let n_ref = n_container.lock().expect("Lock not poisoned");
+    println!("{}", *n_ref);
 }
 ```
 
@@ -235,7 +235,7 @@ fn main() {
 - Producent počítá a odesílá. Konzument přijímá a v mezičase dělá jinou práci.
 - Potenciál urychlení v paralelním a souběžném prostředí.
 - Typická implementace:
-  - primitiva (_Mutexy_, _Condition Variables_, _Fronty_, etc.), nad sdílenou pamětí.
+  - primitiva (_Mutexy_, _Condition Variables_, _Fronty_, etc.), souběžný přístup k paměti.
 - Rust:
   - `channel` = `Sender` 🎤 a `Receiver` 🔊
 
@@ -316,7 +316,7 @@ async fn pump_events(
 <style>
 img[alt~="tokio-logo"] {
   position: absolute;
-  top: 420px;
+  top: 390px;
   right: 140px;
   width: 250px
 }
@@ -329,11 +329,15 @@ knihovny, v Rustu se říká _craty_ (angl. crate = bedna)
 - `axum` - webový aplikační framework
   - `Router`, `routing::get`, `response::sse`
 
+S jejich pomocí mě __podpora SSE stála pouze 150 řádků__
+
 ![tokio-logo](./img/tokio.png)
 
 ---
 
 ![logo](img/edhouse_logo.png)
+
+## Implementace `EventPublisher`
 
 ```rust
 pub struct DefaultEventPublisher {
@@ -358,8 +362,9 @@ impl EventPublisher for DefaultEventPublisher {
 
 ![logo](img/edhouse_logo.png)
 
-```rust
+## Handler requestu `GET /events`
 
+```rust
 pub async fn get_events(
     State(state): State<Arc<ApiState>>,
 ) -> Sse<impl Stream<Item = Result<Event, BoxError>>> {

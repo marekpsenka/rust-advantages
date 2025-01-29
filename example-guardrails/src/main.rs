@@ -1,8 +1,8 @@
 use std::sync::{Arc, Mutex};
 
 fn f(n_container: Arc<Mutex<i32>>) {
-    let mut n = n_container.lock().expect("Lock is not poisoned");
-    *n += 1;
+    let mut n_ref = n_container.lock().expect("Lock is not poisoned");
+    *n_ref += 1;
 }
 
 fn main() {
@@ -12,6 +12,6 @@ fn main() {
         f(container_clone);
     });
     _ = my_thread.join();
-    let n = n_container.lock().expect("Lock not poisoned");
-    println!("{}", *n);
+    let n_ref = n_container.lock().expect("Lock not poisoned");
+    println!("{}", *n_ref);
 }
