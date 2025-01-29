@@ -56,7 +56,7 @@ Zaměříme se na vybrané přednosti, o kterých 'nikdo nemluví'
 
 1. Souběžnost bez obav (Fearless Concurrency)
 2. Živý ekosystém a komunita
-3. Silná makra and generiky
+3. Silná makra a generiky
 4. Práce s chybami
 
 ---
@@ -440,7 +440,7 @@ impl EventDto {
 
 ![logo](img/edhouse_logo.png)
 
-## Implementace trait pomocí procedurálního makra
+## Implementace traitu pomocí procedurálního makra
 
 ```rust
 #[derive(Serialize)]
@@ -522,7 +522,7 @@ impl CoffeeMachine {
 
 - Errory
   - jsou vidět, jsou explicitní
-  - neřešit error je opt-out, programátor musí explicitně říct, že ho nechce řešit
+  - řešení errorů je opt-out, programátor musí explicitně říct, že ho nechce řešit
 
 ---
 
@@ -552,7 +552,7 @@ img[alt~="linkedin-qr"] {
 - Rust má mnoho předností, o kterých 'se nemluví', vybral jsem pro vás:
   1. Souběžnost bez obav (Fearless Concurrency)
   2. Živý ekosystém a komunitu
-  3. Silná makra and generiky
+  3. Silná makra a generiky
   4. Práci s chybami
 
 ![linkedin-qr](./img/qr-linkedin.png)
